@@ -32,9 +32,10 @@ RUN adduser \
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
+COPY ./src/requirements.txt .
+RUN --mount=type=cache,target=/root/.cache/pip
+#    --mount=type=bind,source=requirements.txt,target=requirements.txt \
+#    python -m pip install -r requirements.txt
 
 # Switch to the non-privileged user to run the application.
 USER appuser
@@ -43,9 +44,7 @@ USER appuser
 COPY ./src /app
 
 # Expose the port that the application listens on.
-# Default port 8000 is exposed, I manually disabled this, since it is not needed.
 # EXPOSE 8000
 
 # Run the application.
-CMD python 'main.py'
-
+CMD python main.py

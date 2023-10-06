@@ -1,4 +1,4 @@
-nclude any files or directories that you don't want to be copied to your
+# Include any files or directories that you don't want to be copied to your
 # container here (e.g., local build artifacts, temporary files, etc.).
 #
 # For more help, visit the .dockerignore file reference guide at
@@ -32,4 +32,3 @@ nclude any files or directories that you don't want to be copied to your
 **/values.dev.yaml
 LICENSE
 README.md
-
